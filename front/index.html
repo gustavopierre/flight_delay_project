@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="styles.css">
 
-    <title>AI Diabetes System</title>
+    <title>AI Flight Delay Prediction System</title>
     <link rel="icon" href="img/home_logo.jpeg" type="image/png">
 </head>
 
@@ -15,10 +15,10 @@
      <!-- Cabeçalho de informações do sistema -->
     <header>
         <div class="title">
-            <h2>Bem-Vindo ao AI Diabetes System</h2>
+            <h2>Bem-Vindo ao AI Flight Delay Prediction System</h2>
             <br>
-            <p>Este sistema foi desenvolvido para auxiliar no diagnóstico de diabetes.</p>
-            <p>Para isso, basta preencher os campos abaixo com os dados do paciente e clicar em "Diagnosticar".</p>
+            <p>Este sistema foi desenvolvido para prever atrasos de voos.</p>
+            <p>Para isso, basta preencher os campos abaixo com os dados do voo e clicar em "Prever Atraso".</p>
         </div>
         <!-- <div class="banner">
             <img src="img/home.jpeg">
@@ -28,35 +28,67 @@
      <!-- Opções para adicionar um novo item -->
      
     <section class="newItem">
-        <input type="text" id="newInput" placeholder="Nome">
-        <input type="text" id="newPreg" placeholder="Pregancies">
-        <input type="text" id="newPlas" placeholder="Glucose">
-        <input type="text" id="newPres" placeholder="Blood Pressure">
-        <input type="text" id="newSkin" placeholder="Skin Thickness">
-        <input type="text" id="newTest" placeholder="Insulin">
-        <input type="text" id="newMass" placeholder="BMI">
-        <input type="text" id="newPedi" placeholder="Diabetes Pedigree Function">
-        <input type="text" id="newAge" placeholder="Age">
-        <button type="button" onclick="newItem(event)" class="addBtn">Diagnosticar</button>
-    </section>    <!-- Tabela com items existentes -->
-    <section class="items">
-        <div class="table-container">
-            <table id="myTable">
-                <tr>
-                    <th>Nome</th>
-                    <th>Pregancies</th>
-                    <th>Glucose</th>
-                    <th>Blood Pressure</th>
-                    <th>Skin Thickness</th>
-                    <th>Insulin</th>
-                    <th>BMI</th>
-                    <th>Diabetes Pedigree Function</th>
-                    <th>Age</th>
-                    <th>Diagnostic</th>
-                    <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15" height="15"></th>
-                    <!-- <th><img src="img/edit.png" width="15" height="15"></th> -->
-                </tr>
-            </table>
+        <select id="newAirline" required>
+            <option value="">Selecione a Companhia Aérea</option>
+            <option value="9E">9E - Endeavor Air</option>
+            <option value="AA">AA - American Airlines</option>
+            <option value="AS">AS - Alaska Airlines</option>
+            <option value="B6">B6 - JetBlue Airways</option>
+            <option value="CO">CO - Continental Airlines</option>
+            <option value="DL">DL - Delta Air Lines</option>
+            <option value="EV">EV - ExpressJet</option>
+            <option value="F9">F9 - Frontier Airlines</option>
+            <option value="FL">FL - AirTran Airways</option>
+            <option value="HA">HA - Hawaiian Airlines</option>
+            <option value="MQ">MQ - Envoy Air</option>
+            <option value="OH">OH - PSA Airlines</option>
+            <option value="OO">OO - SkyWest Airlines</option>
+            <option value="UA">UA - United Airlines</option>
+            <option value="US">US - US Airways</option>
+            <option value="WN">WN - Southwest Airlines</option>
+            <option value="XE">XE - ExpressJet</option>
+            <option value="YV">YV - Mesa Airlines</option>
+        </select>
+        <input type="number" 
+               id="newFlight" 
+               placeholder="Flight Number" 
+               min="1" 
+               title="Digite o número do voo"
+               required>
+        <input type="text" id="newAirportFrom" placeholder="Airport From (ex: SFO, LAX)">
+        <input type="text" id="newAirportTo" placeholder="Airport To (ex: IAH, CLT)">
+        <select id="newDayOfWeek" required>
+            <option value="">Selecione o Dia da Semana</option>
+            <option value="1">1 - Segunda-feira</option>
+            <option value="2">2 - Terça-feira</option>
+            <option value="3">3 - Quarta-feira</option>
+            <option value="4">4 - Quinta-feira</option>
+            <option value="5">5 - Sexta-feira</option>
+            <option value="6">6 - Sábado</option>
+            <option value="7">7 - Domingo</option>
+        </select>
+        <input type="number" 
+               id="newTime" 
+               placeholder="Time (minutes from midnight)" 
+               min="0" 
+               max="1439" 
+               title="Digite minutos desde a meia-noite (0-1439)"
+               required>
+        <input type="number" 
+               id="newLength" 
+               placeholder="Flight Length (distance)" 
+               min="1" 
+               title="Digite a distância do voo em milhas"
+               required>
+        
+        <button type="button" onclick="newItem(event)" class="addBtn">Prever Atraso</button>
+    </section>
+    
+    <!-- Campo de resultado da previsão -->
+    <section class="result">
+        <div id="predictionResult" class="prediction-container" style="display: none;">
+            <h3>Resultado da Previsão</h3>
+            <div id="predictionOutput" class="prediction-output"></div>
         </div>
     </section>
 
